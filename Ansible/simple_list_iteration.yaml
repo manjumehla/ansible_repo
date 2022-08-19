@@ -11,7 +11,7 @@
 
   tasks: 
   - name: Create multiple users
-    ansible_become_user:
+    ansible.builtin.user:
       name: "{{ item }}" 
       groups: IT_suppotrs   
       state: present

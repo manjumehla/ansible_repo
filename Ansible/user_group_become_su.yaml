@@ -1,12 +1,14 @@
 ---
 # become su method playbook
 - hosts: webserver
-  become: yes
-  become_method: su
   
   vars:
+    ansible_become: yes
+    ansible_become_method:  su
+    ansible_become_user: root
+    ansible_become_password: "hello"
     ansible_connection: ssh
-    ansible_user: root
+    ansible_user: lnxserver01
     ansible_password: "hello"
 
     tasks:

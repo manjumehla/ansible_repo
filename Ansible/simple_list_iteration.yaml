@@ -10,11 +10,11 @@
      ansible_passwd: "{{ ans_pwd }}"
 
   tasks: 
-    - name: Create multiple users
-      ansible_become_user:
-          name: "{{ item }}" 
-          group: IT_suppotrs
-          state: present
+  - name: Create multiple users
+    ansible_become_user:
+      name: "{{ item }}" 
+      group: IT_suppotrs   
+      state: present
       loop:
         - webuser1
         - webuser2       

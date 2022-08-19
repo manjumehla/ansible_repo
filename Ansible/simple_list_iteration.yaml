@@ -7,7 +7,7 @@
   vars:
     ansible_connection: ssh
     ansible_user: lnxserver01
-    ansible_password: "{{ ans_pwd }}"
+    ansible_password: "{{ans_pwd}}"
 
   tasks: 
   - name: Create multiple users

@@ -13,7 +13,7 @@
   - name: Create multiple users
     ansible.builtin.debug:
       msg: "{{ item.key }} is {{ item.value}}"
-    loop: "{{ user_data | dict2item }}"
+    loop: "{{ user_data | dict2items }}"
     vars: 
       user_data:
          username: "user1"

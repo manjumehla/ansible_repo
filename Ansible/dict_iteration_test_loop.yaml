@@ -1,5 +1,5 @@
 ---
-# Creating user by dictionary iteration loop
+# dictionary iteration loop
 - hosts: webserver
   become: yes
   become_method: sudo
@@ -10,15 +10,12 @@
     ansible_password: "{{ ans_pwd }}"
 
   tasks:
-  - name: Creating user by dictionary loop
-    ansible.builtin.user:
-      msg: "{{ item.key }}  {{ item.value }}"
-    loop: "{{ user_data | dict2items }}"  
+  - name: Using dict2items
+    ansible.builtin.debug:
+       msg: "{{ item.key }} - {{ item.value }}"
+    loop: "{{ tag_data | dict2items }}"
     vars:
-      user_data:
-        name: jash
-        uid: 8900
-        group: software
-        shell: /bin/bash
-        state: present        
+      tag_data:
+        Environment: dev
+        Application: payment  
  

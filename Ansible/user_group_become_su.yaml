@@ -6,10 +6,10 @@
     ansible_become: yes
     ansible_become_method:  su
     ansible_become_user: root
-    ansible_become_password: "hello"
+    ansible_become_password: "{{ ans_become_pwd }}"
     ansible_connection: ssh
     ansible_user: lnxserver01
-    ansible_password: "hello"
+    ansible_password: "{{ ans_pwd }}"
 
     tasks:
     - name: create a group

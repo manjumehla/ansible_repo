@@ -13,7 +13,7 @@
   - name: Create multiple users
     ansible_become_user:
       name: "{{ item }}" 
-      group: IT_suppotrs   
+      groups: IT_suppotrs   
       state: present
     loop:
         - webuser1

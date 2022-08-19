@@ -1,0 +1,20 @@
+---
+# General playbook list iteration
+- hosts: webserver
+  become: yes  
+  become_method: sudo
+
+  vars:
+    ansible_connection: ssh
+    ansible_user: lnxserver01
+    ansible_password: "{{ans_pwd}}"
+
+  tasks: 
+  - name: Create multiple users
+    ansible.builtin.debug:
+      msg: "{{ item.key }} is {{ item.value}}"
+    loop: "{{ user_data | dict2item }}"
+    vars: 
+      user_data:
+         username: "user1"
+         groupname: "group1"

@@ -13,3 +13,7 @@
   - name: linux command
     ansible.builtin.shell: cat /etc/passwd
     register: output
+  
+  - name: check the output
+    ansible.builtin.debug:
+      msg: "{{output}}"

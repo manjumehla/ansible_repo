@@ -1,13 +1,13 @@
 ---
-# General playbook of become method sudo
+# General playbook list iteration
 - hosts: webserver
   become: yes  
   become_method: sudo
 
   vars:
-     ansible_connection: ssh
-     ansible_user: lnxserver01
-     ansible_passwd: "{{ ans_pwd }}"
+    ansible_connection: ssh
+    ansible_user: lnxserver01
+    ansible_password: "{{ ans_pwd }}"
 
   tasks: 
   - name: Create multiple users
@@ -15,6 +15,6 @@
       name: "{{ item }}" 
       group: IT_suppotrs   
       state: present
-      loop:
+    loop:
         - webuser1
         - webuser2       

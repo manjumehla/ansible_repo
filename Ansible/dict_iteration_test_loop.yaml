@@ -1,0 +1,24 @@
+---
+# Creating user by dictionary iteration loop
+- hosts: webserver
+  become: yes
+  become_method: sudo
+
+  vars:
+    ansible_connection: ssh
+    ansible_user: lnxserver01
+    ansible_password: "{{ ans_pwd }}"
+
+  tasks:
+  - name: Creating user by dictionary loop
+    ansible.builtin.user:
+      msg: "{{ item.key }}  {{ item.value }}"
+    loop: "{{ user_data | dict2items }}"  
+    vars:
+      user_data:
+        name: jash
+        uid: 8900
+        group: software
+        shell: /bin/bash
+        state: present        
+ 

@@ -12,9 +12,9 @@
   tasks: 
     - name: Create multiple users
       ansible_become_user:
-        - name: "{{ item }}" 
+          name: "{{ item }}" 
           group: IT_suppotrs
           state: present
-  loop:
-   - webuser1
-   - webuser2       
+      loop:
+        - webuser1
+        - webuser2       

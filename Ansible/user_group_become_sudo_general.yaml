@@ -1,0 +1,16 @@
+---
+# General playbook of become method sudo
+- hosts: webserver
+  become: yes  
+  become_method: sudo
+
+  vars:
+     ansible_connection: ssh
+     ansible_user: "{{ ansible_user }}"
+     ansible_passwd: "{{ ans_pwd }}"
+
+  tasks:
+  - name: Creating a group
+    ansible.builtin.group:
+      name: helpdesk
+      gid: 17000

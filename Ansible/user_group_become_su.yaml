@@ -1,0 +1,16 @@
+---
+# become su method playbook
+- hosts: webserver
+  become: yes
+  become_method: su
+  
+  vars:
+    ansible_connection: ssh
+    ansible_user: root
+    ansible_password: "hello"
+
+    tasks:
+    - name: create a group
+      ansible.bultin.group:
+         name: IT_suppotrs
+         gid: 100288

@@ -1,0 +1,13 @@
+---
+#creating user
+- hosts: localhost
+
+  tasks:
+    -  name: creating a user account
+       ansible.builtin.user:
+          name: user2
+          uid: 1201
+          group: experts
+          comment: "creating first user account"
+          shell: /bin/bash
+

@@ -1,0 +1,11 @@
+---
+#installing packages
+- hosts: localhost
+
+  tasks:
+    -  name: install packages on localhost
+       ansible.builtin.apt:
+          name: "{{package_name}}"
+          state: present
+          
+    

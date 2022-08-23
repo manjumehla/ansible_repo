@@ -8,8 +8,8 @@
     ansible_user: lnxserver01
     ansible_password: "{{ ans_pwd }}"
     username: 
-     - webuser1
-     - webuser2
+     - user11
+     - user22
     packages:
      - git
      - sendmail

@@ -1,0 +1,18 @@
+---
+- hosts: webserver
+  become: yes
+  become_method: sudo
+
+  vars:
+    ansible_connection: ssh
+    ansible_user: lnxserver01
+    ansible_password: "{{ ans_pwd }}"
+
+  tasks:    
+  - name: adding multiple users
+    ansible.builtin.user:
+      name: "{{ item.user }}"
+      state: "{{ item.state }}"
+      group: "{{ item.group }}"
+    loop: 
+    - name:  

@@ -15,6 +15,6 @@
       state: "{{ item.state }}"
       groups: "{{ item.group }}"
     loop: 
-      - { name: 'user1', groups: 'software', state: 'present'}
-      - { name: 'user2', groups: 'software', state: 'present'}
+      - { name: 'user1', group: 'software', state: 'present'}
+      - { name: 'user2', group: 'software', state: 'present'}
   

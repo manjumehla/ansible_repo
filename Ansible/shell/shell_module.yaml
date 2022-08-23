@@ -1,0 +1,13 @@
+--- 
+## shell module 
+- hosts: webserver
+
+  vars: 
+    ansible_connection: ssh
+    ansible_user: lnxserver01
+    ansible_password: "{{ ans_pwd }}"
+
+  tasks:
+  - name: using linux command
+    ansible.builtin.shell: cat /etc/passwd
+    register: output

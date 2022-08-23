@@ -1,13 +1,19 @@
---- 
-## shell module 
+---
+# shell module
 - hosts: webserver
+  become: yes
+  become_method: sudo
 
-  vars: 
+  vars:
     ansible_connection: ssh
     ansible_user: lnxserver01
     ansible_password: "{{ ans_pwd }}"
 
   tasks:
-  - name: using linux command
+  - name: linux command
     ansible.builtin.shell: cat /etc/passwd
     register: output
+  
+  - name: check the output
+    ansible.builtin.debug:
+      msg: "{{output}}"

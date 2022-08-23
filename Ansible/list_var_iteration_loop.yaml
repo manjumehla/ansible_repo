@@ -4,26 +4,26 @@
   become_method: sudo
 
   vars:
-  ansible_connection: ssh
-  ansible_user: lnxserver01
-  ansible_root: "{{hello}}"
-  username: 
-  - webuser1
-  - webuser2
-  packages:
-   - git
-   - sendmail
+    ansible_connection: ssh
+    ansible_user: lnxserver01
+    ansible_password: "{{ ans_pwd }}"
+    username: 
+     - webuser1
+     - webuser2
+    packages:
+     - git
+     - sendmail
    
   tasks:
 
   - name: create multiple user
     ansible.builtin.user: 
-      name: "{{item}}"
-      uid: 1345
+      name: "{{ item }}"
       group: software
-    loop: "{{username}}"  
+      state: present
+    loop: "{{ username }}"  
 
   - name: install packages
-    ansible.builtin.apt:
-      name: "{{packages}}"
+    ansible.builtin.yum:
+      name: "{{ packages }}"
       state: present

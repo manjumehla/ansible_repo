@@ -1,0 +1,31 @@
+---
+#condition demo
+- hosts: webserver
+  become: yes
+  become_method: sudo
+
+  vars:
+    ansible_connection: ssh
+    ansible_user: lnxserver01
+    ansible_password: "{{ ans_pwd }}"
+
+  tasks:
+  - name: checking ansible facts
+    ansible.builtin.debug:
+     var: ansible_facts
+
+  - name: checking ansible facts of os family
+    ansible.builtin.debug:
+      msg: "{{ ansible_facts['os_family'] }}"
+     
+  - name: checking ansible facts architecture
+    ansible.builtin.debug:
+      msg: "{{ ansible_facts['architecture'] }}"
+
+  - name: creating user
+    ansible.builtin.user:
+      name: gorv
+      group: software   
+      uid: 9090
+      state: present
+    when: ansible_facts['os_family'] == "RedHat"   

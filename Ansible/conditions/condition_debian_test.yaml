@@ -1,0 +1,31 @@
+---
+#condition demo
+- hosts: webserver
+  become: yes
+  become_method: sudo
+
+  vars:
+    ansible_connection: ssh
+    ansible_user: lnxserver01
+    ansible_password: "{{ ans_pwd }}"
+
+  tasks:
+  - name: checking ansible facts
+    ansible.builtin.debug:
+     var: ansible_facts
+
+  - name: checking ansible facts of os family
+    ansible.builtin.debug:
+      msg: "{{ ansible_facts['os_family'] }}"
+     
+  - name: checking ansible facts architecture
+    ansible.builtin.debug:
+      msg: "{{ ansible_facts['architecture'] }}"
+
+  - name: create a user when os family is not debian
+    ansible.builtin.user:
+      name: ravi
+      group: software   
+      uid: 90789
+      state: present
+    when: ansible_facts['os_family'] != "deian" 

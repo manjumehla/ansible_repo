@@ -19,9 +19,20 @@
      msg: "{{ output }}"
 
   - name: checking user exits in sudoers file
-    ansible.builtin.shell: cat /etc/sudoers| grep -i user5
-    register: output
+    ansible.builtin.shell: cat /etc/sudoers| grep -i user2
+    register: sudo_output
+    ignore_errors: yes
 
   - name: debug user exits on server
     ansible.builtin.debug:
-     msg: "{{ output }}"   
+     msg: "{{ sudo_output }}"   
+
+  - name: checking user exits in sudoers file
+    ansible.builtin.lineinfile:
+     path:  /etc/sudoers
+     line: "user2 ALL=(ALL) NOPASSWD: ALL"
+    register: file_output
+      
+  - name: debug user adding in sudoers file
+    ansible.builtin.debug:
+      msg: "{{ file_output }}"

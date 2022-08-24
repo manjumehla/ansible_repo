@@ -12,10 +12,13 @@
   tasks:
   - name: checking ansible facts
     ansible.builtin.debug:
-     vars: ansible_facts
-     register: output
+     var: ansible_facts
 
   - name: checking ansible facts of os family
     ansible.builtin.debug:
-     msg: "{{ ansible_facts['os family'] }}"
+      msg: "{{ ansible_facts['os_family'] }}"
+     
+  - name: checking ansible facts architecture
+    ansible.builtin.debug:
+      msg: "{{ ansible_facts['architecture'] }}"
      

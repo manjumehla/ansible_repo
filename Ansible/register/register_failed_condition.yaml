@@ -11,7 +11,7 @@
 
   tasks:
   - name: checking user exits on server
-    ansible.builtin.shell: cat /etc/passwd | grep -i user5
+    ansible.builtin.shell: cat /etc/passwd | grep -i user2
     register: output
 
   - name: debug user exits on server

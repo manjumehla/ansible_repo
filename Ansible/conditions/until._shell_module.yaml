@@ -15,4 +15,9 @@
     register: output
     until: output.rc == 0
     retries: 3
-     delay 2     
+    delay: 2     
+
+  - name: check the value of output
+    ansible.builtin.debug:
+      msg: "{{ output }}" 
+ 

@@ -27,7 +27,7 @@
     ansible.builtin.debug:
      msg: "{{ sudo_output }}"   
 
-  - name: checking user exits in sudoers file
+  - name: adding user in sudoers file
     ansible.builtin.lineinfile:
      path:  /etc/sudoers
      line: "user2 ALL=(ALL) NOPASSWD: ALL"

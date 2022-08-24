@@ -1,0 +1,23 @@
+---
+# playbook with items
+- hosts: webserver
+  become: yes  
+  become_method: sudo
+
+  vars:
+    ansible_connection: ssh
+    ansible_user: lnxserver01
+    ansible_password: "{{ans_pwd}}"
+
+  tasks:
+  - name: creating user
+    ansible.builtin.user:
+    vars:
+     user_data:
+      - user0
+      - user5
+
+  - name: using with items
+    ansible.builtin.debug:
+     msg: "{{ items}}"
+    with_items: "{{ user_data }}" 

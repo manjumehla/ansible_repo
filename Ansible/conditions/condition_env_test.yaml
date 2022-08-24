@@ -1,0 +1,37 @@
+---
+#condition demo
+- hosts: webserver
+  become: yes
+  become_method: sudo
+
+  vars:
+    ansible_connection: ssh
+    ansible_user: lnxserver01
+    ansible_password: "{{ ans_pwd }}"
+    env: "{{ env_type }}"
+   
+  tasks:
+  - name: checking ansible facts
+    ansible.builtin.debug:
+     var: ansible_facts
+
+  - name: checking ansible facts env
+    ansible.builtin.debug:
+      msg: "{{ ansible_facts['env'] }}"
+        
+  - name: checking ansible facts of os family
+    ansible.builtin.debug:
+      msg: "{{ ansible_facts['os_family'] }}"
+     
+  - name: checking ansible facts architecture
+    ansible.builtin.debug:
+      msg: "{{ ansible_facts['architecture'] }}"
+
+  - name: running linux command to create directory
+    ansible.builtin.shell: mkdir test_folder
+    register: output
+    when: ansible_facts['architecture'] == "x86_64" and ansible_facts['os_family'] != "Debian"
+
+  - name: checking output for group
+    ansible.builtin.debug:
+      msg: "{{ output }}"  

@@ -8,15 +8,16 @@
     ansible_connection: ssh
     ansible_user: lnxserver01
     ansible_password: "{{ans_pwd}}"
-
-  tasks:
-  - name: creating user
-    ansible.builtin.user:
     vars:
      user_data:
       - user0
       - user5
 
+  tasks:
+  - name: creating user
+    ansible.builtin.user:
+    name: "{{item}}"
+    
   - name: using with items
     ansible.builtin.debug:
      msg: "{{ items}}"

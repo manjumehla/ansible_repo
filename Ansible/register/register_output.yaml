@@ -1,0 +1,12 @@
+---
+# register output
+- hosts: localhost
+  
+  tasks:
+  - name: register output of creating file
+    ansible.builtin.shell: mkdir /tmp/roles
+    register: output
+
+  - name: checking the value of registered output
+    ansible.builtin.debug:
+      msg: "{{ output }}"     

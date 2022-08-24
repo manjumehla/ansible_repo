@@ -1,0 +1,27 @@
+---
+#checking failed conditions and register output
+- hosts: webserver
+  become: yes
+  become_method: sudo
+
+  vars:
+    ansible_connection: ssh
+    ansible_user: lnxserver01
+    ansible_password: "{{ ans_pwd }}"
+
+  tasks:
+  - name: checking user exits on server
+    ansible.builtin.shell: cat /etc/passwd | grep -i user5
+    register: output
+
+  - name: debug user exits on server
+    ansible.builtin.debug:
+     msg: "{{ output }}"
+
+  - name: checking user exits in sudoers file
+    ansible.builtin.shell: cat /etc/sudoers| grep -i user5
+    register: output
+
+  - name: debug user exits on server
+    ansible.builtin.debug:
+     msg: "{{ output }}"   

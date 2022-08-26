@@ -1,0 +1,24 @@
+---
+#understanding block with conditions concept
+- hosts: webserver
+  become: yes
+  become_method: sudo
+
+  vars:
+    ansible_connection: ssh
+    ansible_user: lnxserver01
+    ansible_password: "{{ ans_pwd }}"
+
+  tasks:
+  - name: block the multiple linux commands
+    block:
+     - name: running linux commands
+       ansible.builtin.shell: mkdir /var/Records
+       register: output
+
+     - name: checking the output value
+       ansible.builtin.debug:
+        msg: "{{ output }}" 
+
+  when: env=="dev"       
+

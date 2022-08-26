@@ -1,0 +1,43 @@
+---
+#creating simple webpage
+- hosts: webserver
+  become: yes
+  become_method: sudo
+
+  vars:
+    ansible_connection: ssh
+    ansible_user: lnxserver01
+    ansible_password: "{{ ans_pwd }}"
+
+  tasks:
+  - name: Block to create simple html webpage
+    block:
+     - name: install httpd service
+       ansible.builtin.yum: 
+         name: httpd
+         state: present
+
+     - name: create an empty file
+       ansible.builtin.file:
+         path: /var/www/mywebpage.html
+         state: touch
+
+     - name: adding code to empty file
+       ansible.builtin.blockinfile:
+         path: /var/www/mywebpage.html      
+         block: |
+          <!DOCTYPE html>
+          <html>
+          <body>
+
+          <h1>Apache webserver for Dev server</h1>
+
+          <p>This is a test server</p>
+
+          </body>
+          </html> 
+     - name: Restart httpd service
+       ansible.builtin.service: 
+         name: httpd
+         state: restarted
+   

@@ -1,0 +1,31 @@
+---
+#understanding block concept
+- hosts: webserver
+  become: yes
+  become_method: sudo
+
+  vars:
+    ansible_connection: ssh
+    ansible_user: lnxserver01
+    ansible_password: "{{ ans_pwd }}"
+
+  tasks:
+  - name: block creating user and group
+    block:
+      - name: create a group
+        ansible.builtin.group:
+         name: Database
+         gid: 6789
+         state: present
+
+      - name: create a user
+        ansible.builtin.user:
+         name: aviraj
+         uid: 3467
+         group: Database
+         shell: /bin/bash
+         state: present
+
+  - name: debug the ansible_facts     
+    ansible.builtin.debug:
+      var: ansible_facts

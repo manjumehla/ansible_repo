@@ -13,12 +13,14 @@
   - name: block the multiple linux commands
     block:
      - name: running linux commands
-       ansible.builtin.shell: mkdir /var/Records
+       ansible.builtin.file: 
+         path: /var/records
+         state: directory
        register: output
 
      - name: checking the output value
        ansible.builtin.debug:
         msg: "{{ output }}" 
 
-  when: env=="dev"       
+    when: env=="dev"       
 

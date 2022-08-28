@@ -1,6 +1,6 @@
 ---
 #creating simple webpage
-- hosts: appserver
+- hosts: webserver
   become: yes
   become_method: sudo
 
@@ -10,27 +10,27 @@
     ansible_password: "{{ ans_pwd }}"
 
   tasks:
-  - name: Block to create simple html webpage
+  - name: block for creating webpage on dev enviornment
     block:
      - name: install httpd service
-       ansible.builtin.yum: 
+       ansible.builtin.yum:
          name: httpd
          state: present
-
+         
      - name: create an empty file
-       ansible.builtin.file:
-         path: /var/www/mywebpage.html
+       ansible.builtin.file: 
+         path: /var/www/dev-webpage.html
          state: touch
 
-     - name: adding code to empty file
+     - name: adding code to file
        ansible.builtin.blockinfile:
-         path: /var/www/mywebpage.html      
+         path: /var/www/dev-webpage.html
          block: |
           <!DOCTYPE html>
           <html>
           <body>
 
-          <h1>Apache webserver for prd server</h1>
+          <h1>Apache webserver for Dev server</h1>
 
           <p>This is a test server</p>
 
@@ -40,5 +40,5 @@
        ansible.builtin.service: 
          name: httpd
          state: restarted
-    when: env=="prd"     
-   
+    when: env=="dev"     
+           

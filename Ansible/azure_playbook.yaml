@@ -6,7 +6,7 @@
   vars:
     ansible_connection: ssh
     ansible_user: lnxserver01
-    ansible_password: "{{ ans_pwd }}"
+    ansible_password: "{{ans_pwd}}"
 
   roles:
-   - role: roles/httpd_roles 
+    - role: roles/httpd_roles 

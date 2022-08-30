@@ -1,0 +1,3 @@
+---
+
+import-playbook: ansible_role2.yaml

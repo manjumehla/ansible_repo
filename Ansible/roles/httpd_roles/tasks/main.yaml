@@ -1,0 +1,16 @@
+---
+
+- name: gather the ansible facts
+  ansible.builtin.debug:
+    msg: "{{ ansible_facts }}"
+
+- name: install httpd package
+  ansible.builtin.yum:
+    name: httpd
+    state: present
+
+- name: restart the service
+  ansible.builtin.service:
+    name: httpd
+    state: restarted    
+

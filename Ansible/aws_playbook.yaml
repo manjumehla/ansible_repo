@@ -9,4 +9,4 @@
     ansible_password: "{{ans_pwd}}"
 
   roles:
-    - role: roles/httpd_roles 
+    - httpd_roles 
